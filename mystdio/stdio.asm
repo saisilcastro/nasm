@@ -1,7 +1,7 @@
 section .text
-global _isdigit
-global _isalpha
-global _isalnum
+	global _isdigit
+	global _isalpha
+	global _isalnum
 _isdigit:
 	mov rax, 1
 	cmp rdi, 0x30 ; compare to 0

@@ -1,0 +1,53 @@
+    extern: Declares an external symbol that is defined in another file.
+    equ: Defines a constant value (e.g., BUFFER_SIZE equ 1024).
+    db: Defines a byte or bytes (e.g., db 'A', 0).
+    dw: Defines a word (2 bytes).
+    dd: Defines a double word (4 bytes).
+    dq: Defines a quad word (8 bytes).
+    resb: Reserves bytes (uninitialized data).
+    resw: Reserves words.
+    resd: Reserves double words.
+    resq: Reserves quad words.
+    times: Repeats a directive or instruction a specified number of times (e.g., times 10 db 0).
+
+NASM Instructions
+
+    mov: Moves data from one location to another (e.g., mov eax, ebx).
+    add: Adds two values (e.g., add eax, 1).
+    sub: Subtracts one value from another (e.g., sub eax, 1).
+    mul: Multiplies two values (e.g., mul ebx).
+    div: Divides two values (e.g., div ebx).
+    inc: Increments a value by one (e.g., inc eax).
+    dec: Decrements a value by one (e.g., dec eax).
+    cmp: Compares two values (e.g., cmp eax, ebx).
+    jmp: Jumps to a specified label (e.g., jmp start).
+    je: Jumps if equal (e.g., je end).
+    jne: Jumps if not equal (e.g., jne loop).
+    jg: Jumps if greater (e.g., jg greater).
+    jl: Jumps if less (e.g., jl less).
+    jge: Jumps if greater or equal (e.g., jge ge).
+    jle: Jumps if less or equal (e.g., jle le).
+    call: Calls a procedure or function (e.g., call func).
+    ret: Returns from a procedure or function (e.g., ret).
+    push: Pushes a value onto the stack (e.g., push eax).
+    pop: Pops a value from the stack (e.g., pop eax).
+    lea: Loads the effective address of a memory operand (e.g., lea rax, [rbx+8]).
+    nop: No operation (does nothing, often used for alignment).
+
+NASM Special Keywords
+
+    %define: Defines a macro (e.g., %define BUFFER_SIZE 1024).
+    %ifdef: Begins a block that is included if a macro is defined.
+    %ifndef: Begins a block that is included if a macro is not defined.
+    %endif: Ends a block started by %ifdef or %ifndef.
+    %include: Includes another file (e.g., %include "macros.inc").
+    %assign: Assigns a value to a macro (e.g., %assign count 10).
+    %macro: Defines a macro with parameters (e.g., %macro my_macro 2).
+    %endmacro: Ends a macro definition.
+
+NASM Registers
+
+    General-purpose registers: rax, rbx, rcx, rdx, rsi, rdi, rsp, rbp, r8-r15.
+    Segment registers: cs, ds, es, fs, gs, ss.
+    Instruction pointer: rip.
+    Flags register: rflags.
