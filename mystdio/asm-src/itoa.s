@@ -5,6 +5,7 @@ EXTERN malloc
 Itoa:
     REG_PUSH
     MOV R10D, 10
+	MOV EAX, EDX
     XOR R9, R9
     MOV R8D, 1
     MOV EAX, ECX

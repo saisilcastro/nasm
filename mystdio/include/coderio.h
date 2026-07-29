@@ -30,6 +30,8 @@ extern char		*StrnStr(const char *, const char *, size_t);
 extern char		*StrMapi(const char *, char (*f)(unsigned int, char));
 extern void		StrIteri(char *, void (*f)(unsigned int, char *));
 extern void		PutcharFd(char, int);
+extern int		PutnbrFd(int, int);
+extern void		PutendlFd(const char *, int);
 extern void		PutstrFd(const char *, int);
 extern int		Atoi(const char*);
 extern char		*Itoa(int);
