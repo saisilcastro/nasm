@@ -1,0 +1,4 @@
+SECTION .TEXT
+	GLOBAL Split
+Split:
+	RET
