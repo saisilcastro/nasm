@@ -51,3 +51,26 @@ NASM Registers
     Segment registers: cs, ds, es, fs, gs, ss.
     Instruction pointer: rip.
     Flags register: rflags.
+
+Linux arguments
+
+    RDI: First argument
+    RSI: Second argument
+    RDX: Third argument
+    RCX: Fourth argument
+    R8: Fifth argument
+    R9: Sixth argument
+
+    XMM0: First floating-point argument
+    XMM1: Second floating-point argument
+    XMM2: Third floating-point argument
+    XMM3: Fourth floating-point argument
+    XMM4: Fifth floating-point argument
+    XMM5: Sixth floating-point argument
+
+Windows arguments
+	RAX: Return argument
+	RCX: First argument
+	RDX: Second argument
+	R8: Third argument
+	R9: Fourth argument

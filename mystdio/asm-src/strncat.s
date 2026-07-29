@@ -1,0 +1,27 @@
+SECTION .TEXT
+GLOBAL StrnCat
+EXTERN StrLen
+StrnCat:
+	PUSH R11
+	PUSH R10
+	CALL StrLen
+	MOV R10, RCX
+	ADD R10, RAX
+copy:
+	CMP R8, 0
+	JE GetNull
+	MOV R11B, BYTE [RDX]
+	MOV BYTE [R10], R11B
+	CMP BYTE [R10], 0
+	JE done
+	INC RDX
+	INC R10
+	DEC R8
+	JMP copy
+GetNull:
+	MOV BYTE [R10], 0
+done:
+	POP R10
+	POP R11
+	MOV RAX, RCX
+	RET

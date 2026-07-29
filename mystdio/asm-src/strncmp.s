@@ -1,0 +1,24 @@
+SECTION .TEXT
+GLOBAL StrnCmp
+StrnCmp:
+	MOV RAX, 0
+search:
+	CMP R8, 0
+	JE done
+	CMP BYTE [RCX], 0
+	JE sub
+	CMP BYTE [RDX], 0
+	JE sub
+	MOV R10B, BYTE [RDX]
+	CMP BYTE [RCX], R10B
+	JNE sub
+	INC RCX
+	INC RDX
+	DEC R8
+	JMP search
+sub:
+	MOVZX RAX, BYTE [RCX]
+	MOVZX RDX, BYTE [RDX]
+	SUB RAX, RDX
+done:
+	RET

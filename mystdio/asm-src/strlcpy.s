@@ -1,0 +1,33 @@
+SECTION .TEXT
+GLOBAL StrlCpy
+EXTERN StrLen
+EXTERN MemCpy
+StrlCpy:
+	PUSH R8
+	PUSH R9
+	PUSH R10
+	PUSH RDX
+	PUSH RCX
+	MOV RCX, RDX
+	CALL StrLen
+	CMP R8, 0
+	JE pop_first
+	LEA R9, [R8 - 1]
+	CMP RAX, R9
+	CMOVE R9, RAX
+	POP RCX
+	LEA R10, [RCX + R9]
+	MOV BYTE [R10], 0
+	MOV R8, R9
+	PUSH RAX
+	CALL MemCpy
+	POP RAX
+	JMP done
+pop_first:
+	POP RCX
+done:
+	POP RDX
+	POP R10
+	POP R9
+	POP R8
+	RET

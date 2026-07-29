@@ -1,0 +1,38 @@
+EXTERN StrLen
+EXTERN malloc
+GLOBAL StrJoin
+SECTION .TEXT
+StrJoin:
+	CALL StrLen
+	MOV R10, RAX
+	PUSH RDX
+	PUSH RCX
+	MOV RCX, RDX
+	CALL StrLen
+	LEA RCX, [R10 + RAX + 1]
+	SUB RSP, 32
+	CALL malloc
+	ADD RSP, 32
+	POP RCX
+	POP RDX
+	CMP RAX, 0
+	JE done
+	MOV R10, RAX
+first:
+	MOV R11B, BYTE [RCX]
+	MOV BYTE [R10], R11B
+	CMP BYTE [R10], 0
+	JE second
+	INC RCX
+	INC R10
+	JMP first
+second:
+	MOV R11B, BYTE [RDX]
+	MOV BYTE [R10], R11B
+	CMP BYTE [R10], 0
+	JE done
+	INC RDX
+	INC R10
+	JMP second
+done:
+	RET

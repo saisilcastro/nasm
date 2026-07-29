@@ -1,0 +1,25 @@
+EXTERN StrLen
+EXTERN malloc
+GLOBAL StrDup
+SECTION .TEXT
+StrDup:
+	CALL StrLen
+	PUSH RCX
+	LEA RCX, [RAX + 1]
+	SUB RSP, 32
+	CALL malloc
+	ADD RSP, 32
+	POP RCX
+	CMP RAX, 0
+	JE done
+	MOV R10, RAX
+copy:
+	MOV DL, BYTE [RCX]
+	MOV BYTE [R10], DL
+	CMP BYTE [R10], 0
+	JE done
+	INC RCX
+	INC R10
+	JMP copy
+done:
+	RET

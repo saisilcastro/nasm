@@ -1,0 +1,17 @@
+%macro REG_PUSH 0
+    PUSH RDX
+    PUSH RCX
+	PUSH R8
+	PUSH R9
+	PUSH R10
+    PUSH R11
+%endmacro
+
+%macro REG_POP 0
+	POP R11
+	POP R10
+	POP R9
+	POP R8
+	POP RCX
+	POP RDX
+%endmacro

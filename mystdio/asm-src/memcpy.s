@@ -1,0 +1,23 @@
+GLOBAL MemCpy
+SECTION .TEXT
+MemCpy:
+	PUSH RDX
+	PUSH RCX
+	PUSH R10
+	PUSH R8
+    MOV RAX, RCX
+process:
+    CMP R8, 0
+	JE done
+	MOVZX R10, BYTE [RDX]
+	MOV BYTE [RCX], R10B
+	INC RDX
+	INC RCX
+	DEC R8
+	JMP process
+done:
+	POP R8
+	POP R10
+	POP RCX
+	POP RDX
+	RET

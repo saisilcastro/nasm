@@ -1,0 +1,15 @@
+GLOBAL StrCpy
+SECTION .TEXT
+StrCpy:
+	MOV RAX, RCX
+copy:
+	CMP BYTE [RDX], 0
+	JE done
+	MOV AL, [RDX]
+	MOV [RCX], AL
+	INC RCX
+	INC RDX
+	JMP copy
+done:
+	MOV BYTE [RCX], 0
+	RET
