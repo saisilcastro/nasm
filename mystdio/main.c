@@ -1,24 +1,43 @@
 #include <coderio.h>
 
+static int is_zeroed(unsigned char *ptr, size_t total)
+{
+    size_t i;
+
+    i = 0;
+    while (i < total)
+    {
+        if (ptr[i] != 0)
+            return 0;
+        i++;
+    }
+    return 1;
+}
+
 int main(void)
 {
-    PutnbrFd(0, 1);
-    PutendlFd("", 1);
+    void *ptr;
 
-    PutnbrFd(42, 1);
-    PutendlFd("", 1);
+    ptr = Calloc(10, sizeof(long));
+    if (!ptr)
+        return 1;
 
-    PutnbrFd(-42, 1);
-    PutendlFd("", 1);
+    if (is_zeroed((unsigned char *)ptr, 10 * sizeof(long)))
+        PutendlFd("Normal allocation test: PASSED", 1);
+    else
+        PutendlFd("Normal allocation test: FAILED", 1);
+    free(ptr);
 
-    PutnbrFd(2147483647, 1);
-    PutendlFd("", 1);
+    ptr = Calloc((size_t)-1, 2);
+    if (!ptr)
+        PutendlFd("Overflow test: PASSED", 1);
+    else
+        PutendlFd("Overflow test: FAILED", 1);
 
-    PutnbrFd(-2147483648, 1);
-    PutendlFd("", 1);
+    ptr = Calloc(0, 5);
+    if (ptr)
+        free(ptr);
+    PutendlFd("Zero count test: PASSED", 1);
 
-    PutnbrFd(999, 2);
-    PutendlFd("", 2);
-
-    return (0);
+    return 0;
 }

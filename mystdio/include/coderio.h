@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 extern void		*Calloc(size_t, size_t);
+//extern size_t	Calloc(size_t, size_t);
 extern void		bZero(void *, size_t);
 extern void		*MemSet(void *, int, size_t);
 extern char 	*MemCpy(void *dest, const void *src, size_t size);
