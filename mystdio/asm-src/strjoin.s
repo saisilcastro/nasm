@@ -1,7 +1,7 @@
-EXTERN StrLen
-EXTERN malloc
-GLOBAL StrJoin
 SECTION .TEXT
+	EXTERN StrLen
+	EXTERN malloc
+	GLOBAL StrJoin
 StrJoin:
 	CALL StrLen
 	MOV R10, RAX

@@ -1,7 +1,7 @@
 %include "include/volatile.inc"
 SECTION .TEXT
-GLOBAL Itoa
-EXTERN malloc
+	GLOBAL Itoa
+	EXTERN malloc
 Itoa:
     REG_PUSH
     MOV R10D, 10

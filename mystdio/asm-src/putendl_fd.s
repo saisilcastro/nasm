@@ -1,5 +1,4 @@
 %include "include/volatile.inc"
-DEFAULT REL
 SECTION .TEXT
     GLOBAL PutendlFd
     EXTERN PutcharFd
