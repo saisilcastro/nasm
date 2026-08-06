@@ -1,6 +1,6 @@
 %include "include/volatile.inc"
 
-SECTION .TEXT
+SECTION .text
 GLOBAL StrTrim
 EXTERN StrLen
 EXTERN StrChr
@@ -10,52 +10,52 @@ StrTrim:
 	CALL StrLen
 	REG_PUSH
 	PUSH R12
-	MOV R12, RDX
-	MOV R9, RCX
-	LEA R11, [RCX + RAX]
+	MOV R12, RSI
+	MOV R9, RDI
+	LEA R11, [RDI + RAX]
 forward:
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE backward
-	PUSH RCX
-	MOVZX RDX, BYTE [RCX]
-	MOV RCX, R12
+	PUSH RDI
+	MOVZX RSI, BYTE [RDI]
+	MOV RDI, R12
 	CALL StrChr
-	POP RCX
+	POP RDI
 	CMP RAX, 0
 	JE backward
-	INC RCX
+	INC RDI
 	JMP forward
 backward:
-	CMP R11, RCX
+	CMP R11, RDI
 	JE alloc
-	MOVZX RDX, BYTE [R11 - 1]
-	PUSH RCX
-	MOV RCX, R12
+	MOVZX RSI, BYTE [R11 - 1]
+	PUSH RDI
+	MOV RDI, R12
 	CALL StrChr
-	POP RCX
+	POP RDI
 	CMP RAX, 0
 	JE alloc
 	DEC R11
 	JMP backward
 alloc:
 	LEA R11, [R11 + 1]
-	SUB R11, RCX
+	SUB R11, RDI
 	CMP R11, 0
 	JE error
 	REG_PUSH
-	MOV RCX, R11
+	MOV RDI, R11
 	SUB RSP, 32
 	CALL malloc
 	ADD RSP, 32
 	REG_POP
 	CMP RAX, 0
 	JE error
-	LEA R8, [RAX + R11 - 1]
-	MOV BYTE [R8], 0
-	MOV R8, R11
-	MOV RDX, RCX
+	LEA RDX, [RAX + R11 - 1]
+	MOV BYTE [RDX], 0
+	MOV RDX, R11
+	MOV RSI, RDI
 	MOV R11, RAX
-	MOV RCX, RAX
+	MOV RDI, RAX
 	CALL StrlCpy
 	MOV RAX, R11
 	JMP done

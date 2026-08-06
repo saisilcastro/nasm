@@ -1,14 +1,13 @@
 %include "include/volatile.inc"
-SECTION .TEXT
+SECTION .text
 	GLOBAL Itoa
 	EXTERN malloc
 Itoa:
     REG_PUSH
     MOV R10D, 10
-	MOV EAX, EDX
     XOR R9, R9
     MOV R8D, 1
-    MOV EAX, ECX
+    MOV EAX, EDI
     CMP EAX, 0
     JGE count
     NEG R8D
@@ -27,7 +26,7 @@ count:
     INC R10
 alloc:
     LEA R10, [R9 + R10]
-    LEA RCX, [R10 + 1]
+    LEA RDI, [R10 + 1]
     MOV RAX, R10
     REG_PUSH
     SUB RSP, 32

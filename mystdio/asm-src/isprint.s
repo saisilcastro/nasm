@@ -1,10 +1,10 @@
 GLOBAL IsPrint
-SECTION .TEXT
+SECTION .text
 IsPrint:
     MOV RAX, 0
-    CMP RCX, 32
+    CMP RDI, 32
     JL done
-    CMP RCX, 126
+    CMP RDI, 126
     JG done
     MOV RAX, 16384
 done:

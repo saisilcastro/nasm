@@ -1,14 +1,14 @@
 GLOBAL IsAlpha
-SECTION .TEXT
+SECTION .text
 IsAlpha:
     MOV RAX, 0
-    CMP RCX, 0x41
+    CMP RDI, 0x41
     JL done
-    CMP RCX, 0x5A
+    CMP RDI, 0x5A
     JLE inside
-    CMP RCX, 0x61
+    CMP RDI, 0x61
     JL done
-    CMP RCX, 0x7A
+    CMP RDI, 0x7A
     JG done
 inside:
     MOV RAX, 1024

@@ -1,17 +1,17 @@
 GLOBAL StrChr
-SECTION .TEXT
+SECTION .text
 StrChr:
-	PUSH RCX
+	PUSH RDI
 	MOV RAX, 0
 search:
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JE transfer
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE done
-	INC RCX
+	INC RDI
 	JMP search
 transfer:
-	MOV RAX, RCX
+	MOV RAX, RDI
 done:
-	POP RCX
+	POP RDI
 	RET

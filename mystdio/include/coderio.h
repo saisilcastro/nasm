@@ -15,7 +15,7 @@ extern void		*MemChr(const void *mem, int c, size_t size);
 extern int		MemCmp(const void *, const void *, size_t);
 extern char		*StrDup(char *);
 extern char		*StrJoin(const char*, const char *);
-extern char		*StrCpy(char *dest, char *src);
+extern char		*StrCpy(char *dest, const char *src);
 extern size_t	StrlCpy(char *, const char *, size_t);
 extern char		*StrnCat(char *, const char *, size_t);
 extern size_t	StrlCat(char *, const char *, size_t);
@@ -31,7 +31,7 @@ extern char		*StrnStr(const char *, const char *, size_t);
 extern char		*StrMapi(const char *, char (*f)(unsigned int, char));
 extern void		StrIteri(char *, void (*f)(unsigned int, char *));
 extern void		PutcharFd(char, int);
-extern int		PutnbrFd(int, int);
+extern void		PutnbrFd(int, int);
 extern void		PutendlFd(const char *, int);
 extern void		PutstrFd(const char *, int);
 extern int		Atoi(const char*);
@@ -44,7 +44,6 @@ extern int		IsPrint(char);
 extern int		IsAscii(char);
 extern int		ToLower(char);
 extern int		ToUpper(char);
-//extern int		Split(const char *, char);
 extern char		**Split(const char *, char);
 
 #endif

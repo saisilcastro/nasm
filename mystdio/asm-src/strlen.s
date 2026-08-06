@@ -1,12 +1,12 @@
-SECTION .TEXT
+SECTION .text
 GLOBAL StrLen
 StrLen:
-	MOV RAX, RCX
+	MOV RAX, RDI
 count:
 	CMP BYTE [RAX], 0
 	JE done
 	INC RAX
 	JMP count
 done:
-	SUB RAX, RCX
+	SUB RAX, RDI
 	RET

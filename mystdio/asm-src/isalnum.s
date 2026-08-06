@@ -1,18 +1,18 @@
 GLOBAL IsAlnum
-SECTION .TEXT
+SECTION .text
 IsAlnum:
     MOV RAX, 0
-    CMP RCX, 0x30
+    CMP RDI, 0x30
     JL done
-    CMP RCX, 0x39
+    CMP RDI, 0x39
     JLE inside
-    CMP RCX, 0x41
+    CMP RDI, 0x41
     JL done
-    CMP RCX, 0x5A
+    CMP RDI, 0x5A
     JLE inside
-    CMP RCX, 0x61
+    CMP RDI, 0x61
     JL done
-    CMP RCX, 0x7A
+    CMP RDI, 0x7A
     JG done
 inside:
     MOV RAX, 8

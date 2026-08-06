@@ -1,18 +1,17 @@
 GLOBAL MemCmp
-SECTION .TEXT
+SECTION .text
 MemCmp:
 	MOV RAX, 0
 isequal:
-	CMP R8, 0
+	CMP RDX, 0
 	JE equal
-	MOVZX R10, BYTE [RCX]
-	MOVZX R11, BYTE [RDX]
-	CMP R10, R11
+	MOV R10B, BYTE [RDI]
+	CMP R10B, BYTE [RSI]
 	JL lesser
 	JG bigger
-	INC RCX
-	INC RDX
-	DEC R8
+	INC RDI
+	INC RSI
+	DEC RDX
 	JMP isequal
 lesser:
 	MOV RAX, -1

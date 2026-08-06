@@ -1,4 +1,4 @@
-NAME = run
+NAME = coderio.a
 OBJ = obj
 INCLUDE = -I./include
 
@@ -11,8 +11,8 @@ SRCOBJS = $(ASMOBJS) $(COBJS)
 
 AS = nasm
 CC = gcc
-LD = gcc
-LDFLAGS = -no-pie -Wl,-z,noexecstack -o $(NAME)
+AR = ar
+ARFLAGS = rcs
 CFLAGS = -c -Wall -Wextra -std=c11
 
 VPATH = .:asm-src
@@ -34,15 +34,15 @@ endif
 all: $(NAME)
 
 $(NAME): $(SRCOBJS)
-	@echo compiling done
-	@$(LD) $(SRCOBJS) $(LDFLAGS)
+	@echo Creating library $@
+	@$(AR) $(ARFLAGS) $@ $(SRCOBJS)
 
 $(OBJ)/%.o: %.s | $(OBJ)
 	@echo Generating $@ from $<
 	@$(AS) $< $(ASFLAGS) -o $@
 
 $(OBJ)/%.o: %.c | $(OBJ)
-	@echo creating $@ from $<
+	@echo Creating $@ from $<
 	@$(CC) $< $(CFLAGS) -o $@ $(INCLUDE)
 
 $(OBJ):
@@ -55,5 +55,3 @@ fclean: clean
 	@$(call REMOVE_FILE,$(NAME))
 
 re: fclean all
-leak:
-	valgrind --leak-check=full -q ./$(NAME)

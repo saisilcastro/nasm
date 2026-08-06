@@ -4,18 +4,18 @@ SECTION .bss
 	Buffer RESB 1
 	MWord RESQ 1
 %include "include/volatile.inc"
-SECTION .TEXT
+SECTION .text
 	GLOBAL Split
 	EXTERN malloc
 	EXTERN free
 Split:
 	XOR RAX, RAX
-	CMP RCX, 0
+	CMP RDI, 0
 	JE void
 	CALL cword
 	MOV [MWord], RAX
 	REG_PUSH
-	LEA RCX, [RAX * 8 + 8]
+	LEA RDI, [RAX * 8 + 8]
 	SUB RSP, 32
 	CALL malloc
 	ADD RSP, 32
@@ -29,26 +29,26 @@ Split:
 	MOV [Array], RAX
 	XOR R8, R8
 wtransfer:
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JNE wlen
-	INC RCX
+	INC RDI
 	JMP wtransfer
 wlen:
-	MOV R9, RCX
+	MOV R9, RDI
 wend:
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE walloc
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JE walloc
-	INC RCX
+	INC RDI
 	JMP wend
 walloc:
-	MOV R10, RCX
+	MOV R10, RDI
 	SUB R10, R9
 	CMP R10, 0
 	JE done
 	REG_PUSH
-	LEA RCX, [R10 + 1]
+	LEA RDI, [R10 + 1]
 	SUB RSP, 32
 	CALL malloc
 	ADD RSP, 32
@@ -57,23 +57,23 @@ walloc:
 	JE dealloc
 	MOV [Buffer], RAX
 	MOV BYTE [RAX + R10], 0
-	MOV RCX, R9
+	MOV RDI, R9
 wcopy:
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE wnext
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JE wnext
-	MOV R10B, BYTE [RCX]
+	MOV R10B, BYTE [RDI]
 	MOV BYTE [RAX], R10B
 	INC RAX
-	INC RCX
+	INC RDI
 	JMP wcopy
 wnext:
 	MOV R10, [Buffer]
 	MOV RAX, [Array]
 	MOV [RAX + R8 * 8], R10
 	INC R8
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JNE wtransfer
 done:
 	REG_POP
@@ -86,14 +86,14 @@ erase:
 	JE cleared
 	MOV RAX, [Array]
 	REG_PUSH
-	MOV RCX, [RAX + R9 * 8]
+	MOV RDI, [RAX + R9 * 8]
 	SUB RSP, 32
 	CALL free
 	ADD RSP, 32
 	REG_POP
 	JMP erase
 cleared:
-	MOV RCX, [Array]
+	MOV RDI, [Array]
 	SUB RSP, 32
 	CALL free
 	ADD RSP, 32
@@ -102,21 +102,21 @@ cleared:
 cword:
 	LETTER_PUSH
 wsearch:
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE count_done
-	CMP BYTE [RCX + 1], 0
+	CMP BYTE [RDI + 1], 0
 	JE next
-	CMP BYTE [RCX + 1], DL
+	CMP BYTE [RDI + 1], SIL
 	JE next
 	JMP increase
 next:
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE increase
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JE increase
 	INC RAX
 increase:
-	INC RCX
+	INC RDI
 	JMP wsearch
 count_done:
 	LETTER_POP

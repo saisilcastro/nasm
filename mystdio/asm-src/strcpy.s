@@ -1,15 +1,15 @@
 GLOBAL StrCpy
-SECTION .TEXT
+SECTION .text
 StrCpy:
-	MOV RAX, RCX
+	MOV RAX, RDI
 copy:
-	CMP BYTE [RDX], 0
+	CMP BYTE [RSI], 0
 	JE done
-	MOV AL, [RDX]
-	MOV [RCX], AL
-	INC RCX
-	INC RDX
+	MOV AL, [RSI]
+	MOV [RDI], AL
+	INC RDI
+	INC RSI
 	JMP copy
 done:
-	MOV BYTE [RCX], 0
+	MOV BYTE [RDI], 0
 	RET

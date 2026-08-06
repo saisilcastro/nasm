@@ -2,15 +2,15 @@
 DEFAULT REL
 SECTION .bss
     Buffer RESB 1
-SECTION .TEXT
+SECTION .text
     GLOBAL PutcharFd
     EXTERN write
 PutcharFd:
 	REG_PUSH
-    MOV [Buffer], CL
-    MOV RCX, RDX
-    LEA RDX, [Buffer]
-    MOV R8, 1
+    MOV [Buffer], DIL
+    MOV RDI, RSI
+    LEA RSI, [Buffer]
+    MOV RDX, 1
     SUB RSP, 32
     CALL write
     ADD RSP, 32

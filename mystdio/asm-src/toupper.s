@@ -1,10 +1,10 @@
 GLOBAL ToUpper
-SECTION .TEXT
+SECTION .text
 ToUpper:
-    MOV RAX, RCX
-    CMP RCX, 0x61
+    MOV RAX, RDI
+    CMP RDI, 0x61
     JL done
-    CMP RCX, 0x7A
+    CMP RDI, 0x7A
     JG done
     SUB RAX, 32
 done:

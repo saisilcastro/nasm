@@ -1,17 +1,17 @@
 %include "include/volatile.inc"
-SECTION .TEXT
+SECTION .text
 	GLOBAL PutnbrFd
 	EXTERN PutcharFd
 PutnbrFd:
 	REG_PUSH
 	MOV R10D, 10
 	XOR R9, R9
-	MOV R8, RDX
-	MOV EAX, ECX
-	CMP ECX, 0
+	MOV R8, RSI
+	MOV EAX, EDI
+	CMP EAX, 0
 	JGE backward
 	PUSH RAX
-	MOV CL, '-'
+	MOV DIL, '-'
 	CALL PutcharFd
 	POP RAX
 	NEG EAX
@@ -23,11 +23,9 @@ backward:
 	INC R9
 	CMP RAX, 0
 	JNE backward
-	MOV RAX, R9
-	MOV RDX, R8
+	MOV RSI, R8
 print:
-	POP R11
-	MOVZX RCX, R11B
+	POP RDI
 	CALL PutcharFd
 	DEC R9
 	CMP R9, 0

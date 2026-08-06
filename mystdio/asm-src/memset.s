@@ -1,13 +1,13 @@
 GLOBAL MemSet
-SECTION .TEXT
+SECTION .text
 MemSet:
-	MOV RAX, RCX
+	MOV RAX, RDI
 transfer:
-	CMP R8, 0
+	CMP RDX, 0
 	JE done
-	MOV BYTE [RCX], DL
-	INC RCX
-	DEC R8
+	MOV BYTE [RDI], SIL
+	INC RDI
+	DEC RDX
 	JMP transfer
 done:
 	RET

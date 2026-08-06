@@ -1,16 +1,16 @@
 GLOBAL MemChr
-SECTION .TEXT
+SECTION .text
 MemChr:
 	MOV RAX, 0
 search:
-	CMP R8, 0
+	CMP RDX, 0
 	JE done
-	CMP BYTE [RCX], DL
+	CMP BYTE [RDI], SIL
 	JE transfer
-	INC RCX
-	DEC R8
+	INC RDI
+	DEC RDX
 	JMP search
 transfer:
-	MOV RAX, RCX
+	MOV RAX, RDI
 done:
 	RET

@@ -1,10 +1,12 @@
 %macro REG_PUSH 0
+	PUSH RDI
+	PUSH RSI
     PUSH RDX
     PUSH RCX
 	PUSH R8
 	PUSH R9
 	PUSH R10
-    PUSH R11
+	PUSH R11
 %endmacro
 
 %macro REG_POP 0
@@ -14,6 +16,8 @@
 	POP R8
 	POP RCX
 	POP RDX
+	POP RSI
+	POP RDI
 %endmacro
 
 %macro NUM_PUSH 0
@@ -31,11 +35,15 @@
 %endmacro
 
 %macro LETTER_PUSH 0
-	PUSH RCX
+	PUSH RDI
+	PUSH RSI
 	PUSH RDX
+	PUSH RCX
 %endmacro
 
 %macro LETTER_POP 0
-	POP RDX
 	POP RCX
+	POP RDX
+	POP RSI
+	POP RDI
 %endmacro

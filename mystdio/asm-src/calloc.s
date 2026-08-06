@@ -1,17 +1,17 @@
 %include "include/volatile.inc"
 
-SECTION .TEXT
+SECTION .text
     GLOBAL Calloc
     EXTERN malloc
     EXTERN bZero
 
 Calloc:
     REG_PUSH
-    MOV RAX, RCX
-    MUL RDX
+    MOV RAX, RDI
+    MUL RSI
     JO overflow_error
 
-    MOV RCX, RAX
+    MOV RDI, RAX
     REG_PUSH
     SUB RSP, 32
     CALL malloc
@@ -21,8 +21,8 @@ Calloc:
     CMP RAX, 0
     JE done
 
-    MOV RDX, RCX
-    MOV RCX, RAX
+    MOV RSI, RDI
+    MOV RDI, RAX
     CALL bZero
     JMP done
 

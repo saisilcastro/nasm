@@ -3,21 +3,21 @@ DEFAULT REL
 SECTION .bss
 	Len RESQ 1
 	Func RESQ 1
-SECTION .TEXT
+SECTION .text
 	GLOBAL StrMapi
 	EXTERN StrLen
 	EXTERN malloc
 StrMapi:
 	REG_PUSH
-	CMP RCX, 0
+	CMP RDI, 0
 	JE error
-	CMP RDX, 0
+	CMP RSI, 0
 	JE error
 	CALL StrLen
 	MOV [Len], RAX
-	MOV [Func], RDX
+	MOV [Func], RSI
 	REG_PUSH
-	LEA RCX, [RAX + 1]
+	LEA RDI, [RAX + 1]
 	SUB RSP, 32
 	CALL malloc
 	ADD RSP, 32
@@ -28,12 +28,12 @@ StrMapi:
 	MOV BYTE [RAX + R8], 0
 	XOR R8, R8
 	MOV R9, RAX
-	MOV R10, RCX
+	MOV R10, RDI
 transfer:
 	CMP R8, [Len]
 	JE done
-	MOV RCX, R8
-	MOV DL, BYTE [R10 + R8]
+	MOV RDI, R8
+	MOV SIL, BYTE [R10 + R8]
 	REG_PUSH
 	SUB RSP, 32
 	CALL [Func]

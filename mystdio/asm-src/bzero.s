@@ -1,16 +1,16 @@
-SECTION .TEXT
+SECTION .text
 GLOBAL bZero
 bZero:
-    PUSH RDX
-    PUSH RCX
-    CMP RDX, 0
+    PUSH RSI
+    PUSH RDI
+    CMP RSI, 0
     JE done
 clear:
-    MOV BYTE [RCX], 0
-    INC RCX
-    DEC RDX
+    MOV BYTE [RDI], 0
+    INC RDI
+    DEC RSI
     JNZ clear
 done:
-    POP RCX
-    POP RDX
+    POP RDI
+    POP RSI
     RET

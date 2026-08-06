@@ -1,41 +1,41 @@
-SECTION .TEXT
+SECTION .text
 GLOBAL StrnStr
 StrnStr:
 	MOV RAX, 0
 search:
-	CMP R8, 0
+	CMP RDX, 0
 	JE done
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE done
-	MOVZX R11, BYTE [RDX]
-	CMP BYTE [RCX], R11B
+	MOVZX R11, BYTE [RSI]
+	CMP BYTE [RDI], R11B
 	JE first
-	INC RCX
-	DEC R8
+	INC RDI
+	DEC RDX
 	JMP search
 first:
-	MOV R9, R8
-	MOV R10, RCX
-	MOV R11, RDX
+	MOV R9, RDX
+	MOV R10, RDI
+	MOV R11, RSI
 matching:
 	MOVZX RAX, BYTE [R11]
 	CMP AL, 0
 	JE verify
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], 0
 	JE verify
 	CMP R12, 0
 	JE verify
-	CMP BYTE [RCX], AL
+	CMP BYTE [RDI], AL
 	JNE verify
-	INC RCX
+	INC RDI
 	INC R11
 	DEC R9
 	JMP matching
 verify:
 	CMP BYTE [R11], 0
 	JE found
-	LEA RCX, [R10 + 1]
-	DEC R8
+	LEA RDI, [R10 + 1]
+	DEC RDX
 	JMP search
 found:
 	MOV RAX, R10

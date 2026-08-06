@@ -1,29 +1,29 @@
 GLOBAL MemMove
-SECTION .TEXT
+SECTION .text
 MemMove:
-	MOV RAX, RCX
-	CMP RCX, RDX
+	MOV RAX, RDI
+	CMP RDI, RSI
 	JA backward
 forward:
-	CMP R8, 0
+	CMP RDX, 0
 	JE done
-	MOVZX R10, BYTE [RDX]
-	MOV BYTE [RCX], R10B
-	INC RCX
-	INC RDX
-	DEC R8
+	MOVZX R10, BYTE [RSI]
+	MOV BYTE [RDI], R10B
+	INC RDI
+	INC RSI
+	DEC RDX
 	JMP forward
 backward:
-	ADD RCX, R8
-	ADD RDX, R8
+	ADD RDI, RDX
+	ADD RSI, RDX
 decrease:
-	CMP R8, 0
+	CMP RDX, 0
 	JE done
-	MOVZX R10, BYTE [RDX - 1]
-	MOV BYTE [RCX - 1], R10B
-	DEC RCX
+	MOVZX R10, BYTE [RSI - 1]
+	MOV BYTE [RDI - 1], R10B
+	DEC RDI
+	DEC RSI
 	DEC RDX
-	DEC R8
 	JMP decrease
 done:
 	RET

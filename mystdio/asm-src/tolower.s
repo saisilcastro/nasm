@@ -1,10 +1,10 @@
 GLOBAL ToLower
-SECTION .TEXT
+SECTION .text
 ToLower:
-    MOV RCX, RAX
-    CMP RCX, 0x41
+    MOV RDI, RAX
+    CMP RDI, 0x41
     JL done
-    CMP RCX, 0x5A
+    CMP RDI, 0x5A
     JG done
     ADD RAX, 32
 done:

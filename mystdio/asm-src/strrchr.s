@@ -1,13 +1,13 @@
-SECTION .TEXT
+SECTION .text
 GLOBAL StrrChr
 StrrChr:
-	XOR EAX, ECX
+	XOR EAX, EDI
 search:
-	CMP BYTE [RCX], DL
-	CMOVE RAX, RCX
-	CMP BYTE [RCX], 0
+	CMP BYTE [RDI], SIL
+	CMOVE RAX, RDI
+	CMP BYTE [RDI], 0
 	JE done
-	INC RCX
+	INC RDI
 	JMP search
 done:
 	RET
